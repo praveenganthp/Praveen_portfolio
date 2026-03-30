@@ -8,8 +8,10 @@ export const Hero = () => {
 
   const handlePreviewAndDownload = () => {
     // Open preview in new tab
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const newTab = window.open(resumeUrl, "_blank");
+    if (newTab) {
+      console.log("Preview opened");
+    }
 
     // Trigger download after slight delay
     setTimeout(() => {
