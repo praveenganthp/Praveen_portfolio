@@ -4,6 +4,22 @@ import { PROFILE } from "../../constants/data";
 import { Button } from "../ui/Button";
 
 export const Hero = () => {
+  const resumeUrl = import.meta.env.VITE_RESUME_URL;
+
+  const handlePreviewAndDownload = () => {
+    // Open preview in new tab
+    const newTab = window.open(resumeUrl, "_blank");
+
+    // Trigger download after slight delay
+    setTimeout(() => {
+      const link = document.createElement("a");
+      link.href = resumeUrl;
+      link.download = "Praveen_Resume.pdf"; // your custom name
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }, 1000); // delay so preview opens first
+  };
   return (
     <section
       id="hero"
@@ -67,31 +83,27 @@ export const Hero = () => {
             </a>
           </Button>
 
-          {import.meta.env.VITE_RESUME_URL ? (
+          {resumeUrl ? (
             <Button
               asChild
               variant="secondary"
               size="lg"
-              className="w-full sm:w-auto min-h-[56px] flex items-center justify-center text-base group"
+              onClick={handlePreviewAndDownload}
+              className="w-full sm:w-auto min-h-[56px] flex items-center justify-center text-base group cursor-pointer"
             >
-              <a
-                href={import.meta.env.VITE_RESUME_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="flex gap-2 items-center"
-              >
+              <span className="flex gap-2 items-center">
                 <Download size={20} className="mr-2 transition-transform group-hover:-translate-y-1" />
                 Download Resume
-              </a>
+              </span>
             </Button>
           ) : (
             <Button
               asChild
               variant="secondary"
               size="lg"
-              className="w-full sm:w-auto min-h-[56px] flex items-center justify-center text-base group"
+              className="w-full sm:w-auto min-h-[56px] flex items-center justify-center text-base group cursor-pointer"
             >
-              <a href="#contact" rel="noreferrer">
+              <a href="#contact" rel="noreferrer" className="flex gap-2 items-center">
                 <Download size={20} className="mr-2 transition-transform group-hover:-translate-y-1" />
                 Contact Me
               </a>
@@ -108,7 +120,9 @@ export const Hero = () => {
         transition={{ duration: 1, delay: 1 }}
         className="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-gray-500 z-10 hidden sm:flex group cursor-pointer"
       >
-        <span className="text-xs font-semibold tracking-[0.2em] uppercase text-purple-400/60 group-hover:text-purple-400 transition-colors">Scroll Down</span>
+        <span className="text-xs font-semibold tracking-[0.2em] uppercase text-purple-400/60 group-hover:text-purple-400 transition-colors">
+          Scroll Down
+        </span>
         <div className="w-px h-12 bg-linear-to-b from-purple-500/60 to-transparent" />
       </motion.a>
     </section>
