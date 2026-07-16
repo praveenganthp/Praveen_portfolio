@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Section } from '../ui/Section';
 import { EDUCATION } from '../../constants/data';
-import { GraduationCap } from 'lucide-react';
+
 
 export const Education = () => {
   return (
