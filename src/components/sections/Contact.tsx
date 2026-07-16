@@ -2,73 +2,188 @@ import { motion } from 'framer-motion';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { FaLinkedinIn, FaGithub } from 'react-icons/fa';
 import { Section } from '../ui/Section';
-import { Button } from '../ui/Button';
 import { PROFILE } from '../../constants/data';
 
 export const Contact = () => {
   return (
-    <Section id="contact" className="py-32 relative overflow-hidden">
-      {/* Glow Behind */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] md:w-[600px] h-[600px] bg-purple-600/10 blur-[150px] rounded-full pointer-events-none z-0" />
-      
-      <motion.div 
-        initial={{ opacity: 0, y: 30, scale: 0.95 }}
-        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative z-10 w-full max-w-5xl mx-auto rounded-3xl border border-purple-500/20 bg-[#120c24]/80 backdrop-blur-2xl shadow-[0_0_50px_rgba(147,51,234,0.1)] p-12 md:p-16 text-center flex flex-col items-center"
-      >
-        <span className="text-purple-400 font-bold tracking-widest uppercase text-sm mb-6 inline-block bg-purple-500/10 px-5 py-2 rounded-full border border-purple-500/20 shadow-sm">
-          Get in Touch
-        </span>
-        
-        <h2 className="text-5xl md:text-6xl font-extrabold font-heading tracking-tight text-white mb-12 leading-[1.1]">
-          Let's build something <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-indigo-400 drop-shadow-sm">together.</span>
-        </h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full mb-12">
-          <div className="flex flex-col items-center justify-center p-6 rounded-2xl bg-[#090514]/50 border border-purple-500/10 hover:border-purple-500/30 transition-colors">
-            <div className="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-400 mb-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]">
-              <MapPin size={24} />
-            </div>
-            <p className="text-gray-300 font-medium">{PROFILE.location}</p>
-          </div>
-          
-          <div className="flex flex-col items-center justify-center p-6 rounded-2xl bg-[#090514]/50 border border-purple-500/10 hover:border-purple-500/30 transition-colors">
-            <div className="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-400 mb-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]">
-              <Phone size={24} />
-            </div>
-            <a href={`tel:${PROFILE.phone}`} className="text-purple-300 font-medium">
-              {PROFILE.phone}
-            </a>
-          </div>
+    <Section id="contact" style={{ background: 'var(--color-background)', padding: '100px 0' }}>
+      <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '0 1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}
+          className="contact-grid"
+        >
+          {/* Left: text */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="section-label" style={{ marginBottom: '1rem' }}>Get in Touch</div>
+            <h2 style={{
+              fontFamily: 'var(--font-heading)',
+              fontSize: 'clamp(2rem, 4vw, 3rem)',
+              fontWeight: 400,
+              color: 'var(--color-foreground)',
+              lineHeight: 1.15,
+              margin: '0 0 1.5rem',
+            }}>
+              Let's build something great together
+            </h2>
+            <p style={{ color: 'var(--color-muted)', lineHeight: 1.7, marginBottom: '2.5rem', fontSize: '1rem' }}>
+              I'm open to full-time opportunities, freelance projects, or just a conversation about interesting problems. Feel free to reach out.
+            </p>
 
-          <div className="flex flex-col items-center justify-center p-6 rounded-2xl bg-[#090514]/50 border border-purple-500/10 hover:border-purple-500/30 transition-colors sm:col-span-2 lg:col-span-1">
-            <div className="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-400 mb-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]">
-              <Mail size={24} />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2.5rem' }}>
+              <a href={`mailto:${PROFILE.email}`} style={{
+                display: 'flex', alignItems: 'center', gap: '12px',
+                color: 'var(--color-muted)', textDecoration: 'none', fontSize: '0.95rem',
+                transition: 'color 0.2s',
+              }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--color-foreground)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-muted)')}
+              >
+                <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(245,166,35,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <Mail size={16} style={{ color: 'var(--color-accent)' }} />
+                </div>
+                {PROFILE.email}
+              </a>
+
+              <a href={`tel:${PROFILE.phone}`} style={{
+                display: 'flex', alignItems: 'center', gap: '12px',
+                color: 'var(--color-muted)', textDecoration: 'none', fontSize: '0.95rem',
+                transition: 'color 0.2s',
+              }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--color-foreground)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-muted)')}
+              >
+                <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(245,166,35,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <Phone size={16} style={{ color: 'var(--color-accent)' }} />
+                </div>
+                {PROFILE.phone}
+              </a>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--color-muted)', fontSize: '0.95rem' }}>
+                <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(245,166,35,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <MapPin size={16} style={{ color: 'var(--color-accent)' }} />
+                </div>
+                {PROFILE.location}
+              </div>
             </div>
-            <a href={`mailto:${PROFILE.email}`} className="text-purple-400 hover:text-purple-300 font-medium transition-colors">
-              {PROFILE.email}
-            </a>
-          </div>
+
+            <div style={{ display: 'flex', gap: '0.75rem' }}>
+              <a
+                href={`https://${PROFILE.linkedin}`}
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '8px',
+                  padding: '11px 22px', borderRadius: '8px',
+                  background: 'var(--color-accent)', color: '#fff',
+                  fontWeight: 600, fontSize: '0.875rem', textDecoration: 'none',
+                  transition: 'background 0.2s',
+                }}
+                onMouseEnter={e => (e.currentTarget.style.background = 'var(--color-accent-dark)')}
+                onMouseLeave={e => (e.currentTarget.style.background = 'var(--color-accent)')}
+              >
+                <FaLinkedinIn size={16} />
+                LinkedIn
+              </a>
+              <a
+                href={`https://${PROFILE.github}`}
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '8px',
+                  padding: '11px 22px', borderRadius: '8px',
+                  background: 'transparent', color: 'var(--color-foreground)',
+                  fontWeight: 600, fontSize: '0.875rem', textDecoration: 'none',
+                  border: '1.5px solid var(--color-border)',
+                  transition: 'all 0.2s',
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--color-accent)'; (e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-accent)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--color-border)'; (e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-foreground)'; }}
+              >
+                <FaGithub size={16} />
+                GitHub
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Right: Visual card */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="contact-right"
+          >
+            <div style={{
+              background: 'var(--color-surface)',
+              border: '1px solid var(--color-border)',
+              borderRadius: '24px',
+              padding: '3rem',
+              textAlign: 'center',
+              boxShadow: '0 8px 40px rgba(0,0,0,0.06)',
+            }}>
+              {/* Yellow blob */}
+              <div style={{
+                width: '120px',
+                height: '120px',
+                borderRadius: '60% 40% 55% 45% / 50% 60% 40% 50%',
+                background: 'var(--color-accent)',
+                margin: '0 auto 1.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+                <span style={{ fontFamily: 'var(--font-heading)', fontSize: '2.5rem', color: 'white', fontWeight: 400 }}>PV</span>
+              </div>
+
+              <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-foreground)', margin: '0 0 0.5rem' }}>
+                Praveenganth V
+              </h3>
+              <p style={{ fontFamily: 'var(--font-sans)', color: 'var(--color-accent)', fontWeight: 600, marginBottom: '1.5rem', fontSize: '0.9rem' }}>
+                Full Stack Developer
+              </p>
+
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', margin: '0 0 1.5rem' }}>
+                <a href={`https://${PROFILE.linkedin}`} target="_blank" rel="noreferrer"
+                  style={{ width: '44px', height: '44px', borderRadius: '50%', background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)', textDecoration: 'none', transition: 'all 0.2s' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-accent)'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--color-accent)'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-muted)'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--color-border)'; }}
+                >
+                  <FaLinkedinIn size={18} />
+                </a>
+                <a href={`https://${PROFILE.github}`} target="_blank" rel="noreferrer"
+                  style={{ width: '44px', height: '44px', borderRadius: '50%', background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)', textDecoration: 'none', transition: 'all 0.2s' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-accent)'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--color-accent)'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-muted)'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--color-border)'; }}
+                >
+                  <FaGithub size={18} />
+                </a>
+                <a href={`mailto:${PROFILE.email}`}
+                  style={{ width: '44px', height: '44px', borderRadius: '50%', background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)', textDecoration: 'none', transition: 'all 0.2s' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-accent)'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--color-accent)'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-muted)'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--color-border)'; }}
+                >
+                  <Mail size={18} />
+                </a>
+              </div>
+
+              <p style={{ fontFamily: 'var(--font-sans)', fontSize: '0.82rem', color: 'var(--color-muted)' }}>
+                © {new Date().getFullYear()} Praveenganth V
+              </p>
+            </div>
+          </motion.div>
         </div>
-        
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 w-full sm:w-auto mt-6">
-          <Button asChild size="lg" className="w-full sm:w-auto h-16 px-10">
-            <a href={`https://${PROFILE.linkedin}`} target="_blank" rel="noreferrer" className="flex gap-2 items-center">
-              <FaLinkedinIn size={22} className="mr-3" />
-              Connect on LinkedIn
-            </a>
-          </Button>
-          
-          <Button asChild variant="secondary" size="lg" className="w-full sm:w-auto h-16 px-10 group">
-            <a href={`https://${PROFILE.github}`} target="_blank" rel="noreferrer" className='flex gap-2 items-center'>
-              <FaGithub size={22} className="mr-3 transition-transform group-hover:scale-110" />
-              GitHub Profile
-            </a>
-          </Button>
-        </div>
-      </motion.div>
+      </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .contact-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+          .contact-right { display: none !important; }
+        }
+      `}</style>
     </Section>
   );
 };

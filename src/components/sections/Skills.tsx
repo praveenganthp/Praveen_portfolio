@@ -1,69 +1,94 @@
 import { motion } from 'framer-motion';
-import type { Variants } from 'framer-motion';
 import { Section } from '../ui/Section';
-import { SectionHeading } from '../ui/SectionHeading';
-import { Card } from '../ui/Card';
 import { SKILLS } from '../../constants/data';
-
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 }
-  }
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-};
 
 export const Skills = () => {
   return (
-    <Section id="skills" className="relative">
-      <SectionHeading 
-        title="Technical Arsenal" 
-        subtitle="The sophisticated tools and rigorous standards I bring to every web product." 
-        centered={true}
-      />
-      
-      <motion.div 
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10"
-      >
-        {SKILLS.map((skillGroup, index) => (
-          <motion.div key={index} variants={itemVariants} className="h-full">
-            <Card hoverEffect={true} className="h-full flex flex-col pt-10 border-purple-500/10 hover:border-purple-500/30">
-              <div className="absolute top-0 right-0 p-6 opacity-10 pointer-events-none">
-                {/* Decorative large number */}
-                <span className="text-8xl font-black font-heading italic text-purple-400 leading-none">
-                  0{index + 1}
-                </span>
+    <Section id="skills" style={{ background: 'var(--color-background)', padding: '100px 0' }}>
+      <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '0 1.5rem' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          style={{ marginBottom: '3.5rem' }}
+        >
+          <div className="section-label" style={{ marginBottom: '0.75rem' }}>Technical Skills</div>
+          <h2 style={{
+            fontFamily: 'var(--font-heading)',
+            fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)',
+            fontWeight: 400,
+            color: 'var(--color-foreground)',
+            margin: 0,
+          }}>
+            My Tech Stack
+          </h2>
+        </motion.div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
+          {SKILLS.map((group, index) => (
+            <motion.div
+              key={group.category}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              style={{
+                background: 'var(--color-surface)',
+                border: '1px solid var(--color-border)',
+                borderRadius: '16px',
+                padding: '1.75rem',
+                transition: 'transform 0.2s, box-shadow 0.2s',
+              }}
+              className="card-hover"
+            >
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                marginBottom: '1.25rem',
+              }}>
+                <div style={{
+                  width: '8px',
+                  height: '8px',
+                  borderRadius: '50%',
+                  background: 'var(--color-accent)',
+                  flexShrink: 0,
+                }} />
+                <h3 style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.8rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  color: 'var(--color-muted)',
+                  margin: 0,
+                }}>
+                  {group.category}
+                </h3>
               </div>
-              
-              <h3 className="text-2xl font-bold font-heading text-white mb-6 tracking-tight relative z-10">
-                {skillGroup.category}
-              </h3>
-              
-              <div className="flex flex-wrap gap-2.5 mt-auto relative z-10">
-                {skillGroup.items.map((skill, i) => (
-                  <span 
-                    key={i}
-                    className="px-4 py-2 rounded-lg bg-[#090514]/80 text-purple-100 text-sm font-medium border border-purple-500/20 hover:border-purple-400/50 hover:bg-purple-900/40 hover:text-white transition-all duration-300 cursor-default shadow-sm hover:shadow-[0_0_20px_rgba(168,85,247,0.25)] hover:-translate-y-0.5"
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                {group.items.map(item => (
+                  <span
+                    key={item}
+                    style={{
+                      padding: '5px 14px',
+                      borderRadius: '999px',
+                      fontSize: '0.82rem',
+                      fontWeight: 500,
+                      background: 'var(--color-surface-2)',
+                      color: 'var(--color-foreground)',
+                      border: '1px solid var(--color-border)',
+                    }}
                   >
-                    {skill}
+                    {item}
                   </span>
                 ))}
               </div>
-            </Card>
-          </motion.div>
-        ))}
-      </motion.div>
-      
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[500px] bg-purple-900/5 blur-[120px] rounded-full pointer-events-none z-0" />
+            </motion.div>
+          ))}
+        </div>
+      </div>
     </Section>
   );
 };

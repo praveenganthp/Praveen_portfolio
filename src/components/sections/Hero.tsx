@@ -1,133 +1,537 @@
 import { motion } from "framer-motion";
-import { Download, ArrowRight, Sparkles } from "lucide-react";
-import { PROFILE } from "../../constants/data";
-import { Button } from "../ui/Button";
+import { Download, ArrowRight, MapPin, Globe2, Code2, Terminal, CheckCircle2 } from "lucide-react";
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] as const },
+});
+
+const TECH_STACK = [
+  "React",
+  "TypeScript",
+  "Next.js",
+  "Redux Toolkit",
+  "Tailwind CSS",
+  "Material UI",
+  "REST APIs",
+  "Node.js",
+];
+
+const EngineerCodeCard = () => {
+  return (
+    <div style={{ position: "relative", width: "100%", maxWidth: "620px", margin: "0 auto" }}>
+      {/* Ambient Glow */}
+      <div
+        style={{
+          position: "absolute",
+          top: "-5rem",
+          left: "-5rem",
+          width: "18rem",
+          height: "18rem",
+          borderRadius: "50%",
+          backgroundColor: "rgba(251, 191, 36, 0.2)",
+          filter: "blur(3rem)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: "-5rem",
+          right: "-5rem",
+          width: "18rem",
+          height: "18rem",
+          borderRadius: "50%",
+          backgroundColor: "rgba(96, 165, 250, 0.2)",
+          filter: "blur(3rem)",
+          pointerEvents: "none",
+        }}
+      />
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        style={{
+          position: "relative",
+          borderRadius: "1rem",
+          border: "1px solid var(--color-border)",
+          backgroundColor: "var(--color-surface)",
+          boxShadow: "var(--shadow-lg)",
+          overflow: "hidden",
+          zIndex: 10,
+        }}
+      >
+        {/* Header Bar */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            borderBottom: "1px solid var(--color-border)",
+            backgroundColor: "#f5f5f4",
+            padding: "1rem 1.5rem",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            <span style={{ height: "1rem", width: "1rem", borderRadius: "50%", backgroundColor: "#f87171" }} />
+            <span style={{ height: "1rem", width: "1rem", borderRadius: "50%", backgroundColor: "#facc15" }} />
+            <span style={{ height: "1rem", width: "1rem", borderRadius: "50%", backgroundColor: "#4ade80" }} />
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.625rem",
+              borderRadius: "0.375rem",
+              border: "1px solid var(--color-border)",
+              backgroundColor: "var(--color-surface)",
+              padding: "0.375rem 0.875rem",
+              fontSize: "0.875rem",
+              fontWeight: 600,
+              boxShadow: "var(--shadow-sm)",
+            }}
+          >
+            <Code2 size={18} color="#f59e0b" />
+            <span>engineer.ts</span>
+          </div>
+
+          <div
+            style={{
+              borderRadius: "9999px",
+              backgroundColor: "#ecfdf5",
+              padding: "0.375rem 0.875rem",
+              fontSize: "0.75rem",
+              fontWeight: 600,
+              color: "#047857",
+              border: "1px solid #a7f3d0",
+            }}
+          >
+            ● Active
+          </div>
+        </div>
+
+        {/* Code Content */}
+        <div
+          style={{
+            backgroundColor: "#0f172a",
+            padding: "2.5rem",
+            fontFamily: "monospace",
+            fontSize: "1rem",
+            lineHeight: 1.625,
+            color: "#d1d5db",
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.75rem",
+          }}
+        >
+          <div style={{ display: "flex", gap: "1.5rem" }}>
+            <span style={{ color: "#6b7280", userSelect: "none", width: "1.25rem" }}>1</span>
+            <div>
+              <span style={{ color: "#38bdf8", fontWeight: 600 }}>const</span>{" "}
+              <span style={{ color: "#fbbf24", fontWeight: 700 }}>engineer</span>:{" "}
+              <span style={{ color: "#22d3ee" }}>Developer</span> = {"{"}
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              gap: "1.5rem",
+              backgroundColor: "rgba(30, 41, 59, 0.8)",
+              margin: "0 -2.5rem",
+              padding: "0.375rem 2.5rem",
+              borderLeft: "2px solid #22d3ee",
+            }}
+          >
+            <span style={{ color: "#9ca3af", userSelect: "none", width: "1.25rem" }}>2</span>
+            <div>
+              <span style={{ color: "#cbd5e1" }}>name</span>:{" "}
+              <span style={{ color: "#34d399", fontWeight: 500 }}>"Praveenganth V"</span>,
+            </div>
+          </div>
+
+          <div style={{ display: "flex", gap: "1.5rem" }}>
+            <span style={{ color: "#6b7280", userSelect: "none", width: "1.25rem" }}>3</span>
+            <div>
+              <span style={{ color: "#cbd5e1" }}>role</span>:{" "}
+              <span style={{ color: "#34d399", fontWeight: 500 }}>"Frontend Engineer"</span>,
+            </div>
+          </div>
+
+          <div style={{ display: "flex", gap: "1.5rem" }}>
+            <span style={{ color: "#6b7280", userSelect: "none", width: "1.25rem" }}>4</span>
+            <div>
+              <span style={{ color: "#cbd5e1" }}>experience</span>:{" "}
+              <span style={{ color: "#34d399", fontWeight: 500 }}>"2+ Years Production"</span>,
+            </div>
+          </div>
+
+          <div style={{ display: "flex", gap: "1.5rem" }}>
+            <span style={{ color: "#6b7280", userSelect: "none", width: "1.25rem" }}>5</span>
+            <div>
+              <span style={{ color: "#cbd5e1" }}>domain</span>:{" "}
+              <span style={{ color: "#34d399", fontWeight: 500 }}>"Healthcare SaaS"</span>,
+            </div>
+          </div>
+
+          <div style={{ display: "flex", gap: "1.5rem" }}>
+            <span style={{ color: "#6b7280", userSelect: "none", width: "1.25rem" }}>6</span>
+            <div>
+              <span style={{ color: "#cbd5e1" }}>stack</span>: [<span style={{ color: "#fcd34d" }}>"React"</span>,{" "}
+              <span style={{ color: "#fcd34d" }}>"TypeScript"</span>, <span style={{ color: "#fcd34d" }}>"Node.js"</span>],
+            </div>
+          </div>
+
+          <div style={{ display: "flex", gap: "1.5rem" }}>
+            <span style={{ color: "#6b7280", userSelect: "none", width: "1.25rem" }}>7</span>
+            <div>
+              <span style={{ color: "#cbd5e1" }}>openToWork</span>:{" "}
+              <span style={{ color: "#c084fc", fontWeight: 700 }}>true</span>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", gap: "1.5rem" }}>
+            <span style={{ color: "#6b7280", userSelect: "none", width: "1.25rem" }}>8</span>
+            <div>{"};"}</div>
+          </div>
+        </div>
+
+        {/* Footer Bar */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            borderTop: "1px solid var(--color-border)",
+            backgroundColor: "#f5f5f4",
+            padding: "1rem 1.5rem",
+            fontSize: "0.9375rem",
+            color: "#4b5563",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "0.625rem" }}>
+            <Terminal size={18} />
+            <span>TypeScript 5.4</span>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "#047857", fontWeight: 600 }}>
+            <CheckCircle2 size={18} color="#059669" />
+            <span>0 Errors</span>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
 
 export const Hero = () => {
   const resumeUrl = import.meta.env.VITE_RESUME_URL;
 
-  const handlePreviewAndDownload = () => {
-    // Open preview in new tab
-    const newTab = window.open(resumeUrl, "_blank");
-    if (newTab) {
-      console.log("Preview opened");
-    }
-
-    // Trigger download after slight delay
+  const handleDownload = () => {
+    if (!resumeUrl) return;
+    window.open(resumeUrl, "_blank");
     setTimeout(() => {
-      const link = document.createElement("a");
-      link.href = resumeUrl;
-      link.download = "Praveen_Resume.pdf"; // your custom name
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }, 1000); // delay so preview opens first
+      const a = document.createElement("a");
+      a.href = resumeUrl;
+      a.download = "Praveenganth_Resume.pdf";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }, 1000);
   };
+
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-12 overflow-hidden"
+      style={{
+        width: "100%",
+        minHeight: "calc(100vh - 80px)",
+        backgroundColor: "var(--color-background)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingTop: "80px",
+        paddingBottom: "40px",
+      }}
     >
-      {/* Premium Background Effects */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[80vw] h-[80vw] md:w-[50vw] md:h-[50vw] bg-purple-600/10 rounded-full blur-[120px] opacity-70 mix-blend-screen pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 w-[60vw] h-[60vw] md:w-[35vw] md:h-[35vw] bg-indigo-600/10 rounded-full blur-[100px] opacity-50 mix-blend-screen pointer-events-none" />
-      </div>
-
-      <div className="container mx-auto px-6 md:px-12 lg:px-24 max-w-5xl relative z-10 flex flex-col items-center text-center grow justify-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-8"
-        >
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-purple-500/20 bg-[#120c24]/80 backdrop-blur-md shadow-[0_0_20px_rgba(147,51,234,0.15)] text-purple-200 font-medium text-sm transition-transform hover:scale-105">
-            <Sparkles size={16} className="text-purple-400" />
-            <span>{PROFILE.role}</span>
-          </div>
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-          className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.1] mb-8 font-heading"
-        >
-          Building{" "}
-          <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-fuchsia-400 to-indigo-400 drop-shadow-sm">
-            responsive and scalable
-          </span>{" "}
-          web applications.
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="text-lg md:text-2xl text-gray-400 max-w-4xl leading-relaxed mb-12 font-light"
-        >
-          {PROFILE.summary}
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row items-stretch justify-center gap-4 w-full sm:w-auto"
-        >
-          <Button
-            asChild
-            size="lg"
-            className="w-full sm:w-auto min-h-[56px] flex items-center justify-center text-base"
-          >
-            <a href="#experience" className="flex gap-2 items-center">
-              View Experience
-              <ArrowRight size={20} className="ml-2" />
-            </a>
-          </Button>
-
-          {resumeUrl ? (
-            <Button
-              asChild
-              variant="secondary"
-              size="lg"
-              onClick={handlePreviewAndDownload}
-              className="w-full sm:w-auto min-h-[56px] flex items-center justify-center text-base group cursor-pointer"
-            >
-              <span className="flex gap-2 items-center">
-                <Download size={20} className="mr-2 transition-transform group-hover:-translate-y-1" />
-                Download Resume
-              </span>
-            </Button>
-          ) : (
-            <Button
-              asChild
-              variant="secondary"
-              size="lg"
-              className="w-full sm:w-auto min-h-[56px] flex items-center justify-center text-base group cursor-pointer"
-            >
-              <a href="#contact" rel="noreferrer" className="flex gap-2 items-center">
-                <Download size={20} className="mr-2 transition-transform group-hover:-translate-y-1" />
-                Contact Me
-              </a>
-            </Button>
-          )}
-        </motion.div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <motion.a
-        href="#about"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1 }}
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-gray-500 z-10 hidden sm:flex group cursor-pointer"
+      <div
+        className="hero-container"
+        style={{
+          width: "100%",
+          maxWidth: "80rem",
+          margin: "0 auto",
+          padding: "0 1.5rem",
+          display: "grid",
+          alignItems: "center",
+        }}
       >
-        <span className="text-xs font-semibold tracking-[0.2em] uppercase text-purple-400/60 group-hover:text-purple-400 transition-colors">
-          Scroll Down
-        </span>
-        <div className="w-px h-12 bg-linear-to-b from-purple-500/60 to-transparent" />
-      </motion.a>
+        {/* Left Content */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", textAlign: "left" }}>
+          {/* Badge */}
+          <motion.div
+            {...fadeUp(0)}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              padding: "0.5rem 2.5rem",
+              borderRadius: "9999px",
+              backgroundColor: "rgba(254, 243, 199, 0.9)",
+              border: "1px solid rgba(252, 211, 77, 0.8)",
+              color: "#92400e",
+              fontSize: "0.8125rem",
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: "0.05em",
+              boxShadow: "var(--shadow-sm)",
+            }}
+          >
+            <span style={{ width: "0.5rem", height: "0.5rem", borderRadius: "50%", backgroundColor: "#f59e0b" }} />
+            FRONTEND ENGINEER
+          </motion.div>
+
+          {/* Heading */}
+          <motion.h1
+            {...fadeUp(0.06)}
+            style={{
+              marginTop: "1rem",
+              maxWidth: "620px",
+              fontSize: "clamp(2.75rem, 5vw, 4rem)",
+              fontWeight: 600,
+              lineHeight: 1.05,
+              letterSpacing: "-0.03em",
+              color: "var(--color-foreground)",
+              fontFamily: "var(--font-heading)",
+            }}
+          >
+            Building Modern <br className="hero-br" /> Healthcare Applications
+          </motion.h1>
+
+          {/* Subtitle / Meta */}
+          <motion.div
+            {...fadeUp(0.12)}
+            style={{
+              marginTop: "1rem",
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              gap: "0.75rem",
+              fontSize: "1rem",
+              fontWeight: 500,
+              color: "var(--color-muted)",
+            }}
+          >
+            <span style={{ fontWeight: 600, color: "var(--color-foreground)" }}>Praveenganth V</span>
+            <span style={{ color: "#d1d5db" }}>•</span>
+            <span>Frontend Engineer</span>
+            <span style={{ color: "#d1d5db" }}>•</span>
+            <span style={{ color: "#6b7280", fontWeight: 400 }}>2+ Years Experience</span>
+          </motion.div>
+
+          {/* Description */}
+          <motion.p
+            {...fadeUp(0.18)}
+            style={{
+              marginTop: "1rem",
+              maxWidth: "600px",
+              fontSize: "1.05rem",
+              color: "#4b5563",
+              lineHeight: 1.7,
+            }}
+          >
+            I build scalable healthcare applications using React, TypeScript, and Node.js, creating intuitive user
+            experiences and maintainable frontend architectures for real-world products.
+          </motion.p>
+
+          {/* Tech Stack */}
+          <motion.div
+            {...fadeUp(0.24)}
+            style={{
+              marginTop: "1.25rem",
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "0.6rem",
+            }}
+          >
+            {TECH_STACK.map((tech) => (
+              <span
+                key={tech}
+                style={{
+                  padding: "0.5rem 0.875rem",
+                  backgroundColor: "var(--color-surface)",
+                  border: "1px solid rgba(231, 229, 228, 0.9)",
+                  borderRadius: "0.75rem",
+                  fontSize: "0.875rem",
+                  fontWeight: 500,
+                  color: "var(--color-muted)",
+                  boxShadow: "var(--shadow-sm)",
+                }}
+              >
+                {tech}
+              </span>
+            ))}
+          </motion.div>
+
+          {/* CTA Buttons */}
+          <motion.div
+            {...fadeUp(0.3)}
+            style={{
+              marginTop: "1.5rem",
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              gap: "1.25rem",
+              width: "100%",
+            }}
+            className="hero-buttons"
+          >
+            <motion.a
+              href="#projects"
+              whileHover={{ scale: 1.02, y: -4 }}
+              whileTap={{ scale: 0.98 }}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "0.625rem",
+                padding: "0 1.75rem",
+                height: "48px",
+                borderRadius: "1rem",
+                background: "linear-gradient(135deg, #F5A623 0%, #e8941a 100%)",
+                color: "#fff",
+                fontWeight: 600,
+                fontSize: "0.9375rem",
+                boxShadow: "0 2px 10px rgba(245,158,11,0.25)",
+                textDecoration: "none",
+              }}
+            >
+              View Projects <ArrowRight size={18} />
+            </motion.a>
+
+            {resumeUrl ? (
+              <motion.button
+                onClick={handleDownload}
+                whileHover={{ scale: 1.02, y: -4 }}
+                whileTap={{ scale: 0.98 }}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "0.625rem",
+                  padding: "0 1.75rem",
+                  height: "48px",
+                  borderRadius: "1rem",
+                  backgroundColor: "var(--color-surface)",
+                  color: "var(--color-foreground)",
+                  border: "1px solid var(--color-border)",
+                  fontWeight: 600,
+                  fontSize: "0.9375rem",
+                  boxShadow: "var(--shadow-sm)",
+                  cursor: "pointer",
+                }}
+              >
+                <Download size={18} />
+                Download Resume
+              </motion.button>
+            ) : (
+              <motion.a
+                href="#contact"
+                whileHover={{ scale: 1.02, y: -4 }}
+                whileTap={{ scale: 0.98 }}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "0.625rem",
+                  padding: "0 1.75rem",
+                  height: "48px",
+                  borderRadius: "1rem",
+                  backgroundColor: "var(--color-surface)",
+                  color: "var(--color-foreground)",
+                  border: "1px solid var(--color-border)",
+                  fontWeight: 600,
+                  fontSize: "0.9375rem",
+                  boxShadow: "var(--shadow-sm)",
+                  textDecoration: "none",
+                }}
+              >
+                <Download size={18} />
+                Download Resume
+              </motion.a>
+            )}
+          </motion.div>
+
+          {/* Status Row */}
+          <motion.div
+            {...fadeUp(0.36)}
+            style={{
+              marginTop: "1.25rem",
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              gap: "1.25rem",
+              fontSize: "0.9375rem",
+              color: "#6b7280",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "0.625rem",
+                backgroundColor: "rgba(236, 253, 245, 0.8)",
+                border: "1px solid rgba(167, 243, 208, 0.8)",
+                padding: "0.5rem 1rem",
+                borderRadius: "9999px",
+              }}
+            >
+              <span style={{ width: "0.625rem", height: "0.625rem", borderRadius: "50%", backgroundColor: "#10b981", boxShadow: "var(--shadow-sm)" }} />
+              <span style={{ fontWeight: 600, color: "#065f46" }}>Open to Opportunities</span>
+            </div>
+            <span className="hero-hide-mobile" style={{ color: "#d1d5db" }}>•</span>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              <MapPin size={18} color="#9ca3af" />
+              <span>Chennai, India</span>
+            </div>
+            <span className="hero-hide-mobile" style={{ color: "#d1d5db" }}>•</span>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              <Globe2 size={18} color="#9ca3af" />
+              <span>Remote Friendly</span>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Right Column: Code Card */}
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
+          <EngineerCodeCard />
+        </div>
+      </div>
+      <style>{`
+        .hero-container {
+          grid-template-columns: 1.3fr 1fr;
+          gap: 4rem;
+        }
+        @media (max-width: 1024px) {
+          .hero-container {
+            grid-template-columns: 1fr;
+            gap: 4rem;
+          }
+          .hero-br {
+            display: none;
+          }
+        }
+        @media (max-width: 640px) {
+          .hero-buttons {
+            width: auto;
+          }
+          .hero-hide-mobile {
+            display: none;
+          }
+        }
+      `}</style>
     </section>
   );
 };

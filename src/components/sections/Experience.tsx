@@ -1,63 +1,112 @@
 import { motion } from 'framer-motion';
 import { Section } from '../ui/Section';
-import { SectionHeading } from '../ui/SectionHeading';
-import { Card } from '../ui/Card';
 import { EXPERIENCE } from '../../constants/data';
 
 export const Experience = () => {
   return (
-    <Section id="experience">
-      <SectionHeading 
-        title="Experience" 
-        subtitle="Where I've delivered high-impact engineering." 
-      />
-      
-      <div className="relative border-l border-purple-500/10 ml-4 md:ml-8 space-y-16 pb-8">
-        {EXPERIENCE.map((exp, index) => (
-          <motion.div 
-            key={exp.id}
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, delay: index * 0.1, ease: "easeOut" }}
-            className="relative pl-10 md:pl-16"
-          >
-            {/* Elegant premium Timeline node */}
-            <div className="absolute -left-[25px] top-8 w-12 h-12 rounded-full bg-[#090514] border-2 border-purple-500/30 flex items-center justify-center z-10 shadow-[0_0_20px_rgba(168,85,247,0.2)]">
-              <div className="w-4 h-4 bg-linear-to-br from-purple-400 to-indigo-400 rounded-full shadow-[0_0_10px_rgba(168,85,247,0.8)]" />
-            </div>
-            
-            <Card hoverEffect={true} className="border-purple-500/10 bg-[#120c24]/90 before:content-[''] before:absolute before:inset-0 before:bg-linear-to-b before:from-purple-500/5 before:to-transparent before:rounded-2xl before:pointer-events-none">
-              <div className="flex flex-col md:flex-row md:items-start justify-between mb-8 gap-4 relative z-10">
-                <div>
-                  <h3 className="text-3xl font-bold font-heading text-white tracking-tight mb-2">{exp.role}</h3>
-                  <p className="text-purple-400 text-xl font-medium tracking-wide">{exp.company}</p>
+    <Section id="experience" style={{ background: 'var(--color-surface)', padding: '100px 0' }}>
+      <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '0 1.5rem' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          style={{ marginBottom: '3.5rem' }}
+        >
+          <div className="section-label" style={{ marginBottom: '0.75rem' }}>Work Experience</div>
+          <h2 style={{
+            fontFamily: 'var(--font-heading)',
+            fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)',
+            fontWeight: 400,
+            color: 'var(--color-foreground)',
+            margin: 0,
+          }}>
+            Where I've Worked
+          </h2>
+        </motion.div>
+
+        <div style={{ position: 'relative', paddingLeft: '2rem', borderLeft: '2px solid var(--color-border)' }}>
+          {EXPERIENCE.map((exp, index) => (
+            <motion.div
+              key={exp.id}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.12 }}
+              style={{
+                position: 'relative',
+                marginBottom: index < EXPERIENCE.length - 1 ? '3.5rem' : 0,
+              }}
+            >
+              {/* Timeline dot */}
+              <div style={{
+                position: 'absolute',
+                left: '-2.6rem',
+                top: '6px',
+                width: '14px',
+                height: '14px',
+                borderRadius: '50%',
+                background: 'var(--color-accent)',
+                border: '3px solid var(--color-surface)',
+                boxShadow: '0 0 0 2px var(--color-accent)',
+              }} />
+
+              {/* Card */}
+              <div style={{
+                background: 'var(--color-background)',
+                border: '1px solid var(--color-border)',
+                borderRadius: '16px',
+                padding: '2rem',
+                transition: 'transform 0.2s, box-shadow 0.2s',
+              }}
+                className="card-hover"
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                  <div>
+                    <h3 style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: '1.4rem',
+                      fontWeight: 400,
+                      color: 'var(--color-foreground)',
+                      margin: '0 0 4px',
+                    }}>
+                      {exp.role}
+                    </h3>
+                    <p style={{ fontFamily: 'var(--font-sans)', color: 'var(--color-accent)', fontWeight: 600, margin: 0, fontSize: '0.95rem' }}>
+                      {exp.company} · {exp.location}
+                    </p>
+                  </div>
+                  <span style={{
+                    alignSelf: 'flex-start',
+                    padding: '4px 14px',
+                    borderRadius: '999px',
+                    fontSize: '0.78rem',
+                    fontWeight: 600,
+                    background: 'rgba(245,166,35,0.12)',
+                    color: '#b07d10',
+                    border: '1px solid rgba(245,166,35,0.3)',
+                    whiteSpace: 'nowrap',
+                  }}>
+                    {exp.duration}
+                  </span>
                 </div>
-                <div className="px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-200 text-sm font-semibold tracking-widest whitespace-nowrap self-start">
-                  {exp.duration}
-                </div>
-              </div>
-              
-              <div className="space-y-6 relative z-10">
-                <p className="text-gray-300 text-lg leading-relaxed font-light">
-                  <strong className="text-white font-medium">Impact: </strong>
+
+                <p style={{ color: 'var(--color-muted)', margin: '0.75rem 0 1rem', lineHeight: 1.7, fontSize: '0.95rem' }}>
                   {exp.description}
                 </p>
-                
-                <div className="w-12 h-px bg-purple-500/30" />
-                
-                <ul className="space-y-4">
-                  {exp.highlights.map((highlight, i) => (
-                    <li key={i} className="flex items-start gap-4 text-gray-400 font-light">
-                      <span className="mt-2 w-1.5 h-1.5 rounded-full bg-purple-400 shrink-0 shadow-[0_0_10px_rgba(168,85,247,0.8)]" />
-                      <span className="leading-relaxed">{highlight}</span>
+
+                <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                  {exp.highlights.map((h, i) => (
+                    <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', color: 'var(--color-muted)', fontSize: '0.9rem', lineHeight: 1.6 }}>
+                      <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--color-accent)', marginTop: '7px', flexShrink: 0 }} />
+                      {h}
                     </li>
                   ))}
                 </ul>
               </div>
-            </Card>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
     </Section>
   );
